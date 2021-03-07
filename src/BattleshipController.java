@@ -3,12 +3,24 @@ import java.util.List;
 
 public class BattleshipController {
     int guesses = 0;
+    BattleshipModel model = new BattleshipModel();
+
+    public BattleshipModel getModel() {
+        return model;
+    }
 
     public BattleshipController() {
     }
 
     public void processGuess(String guess){
-        
+        String location = this.parseGuess(guess);
+        if (location != "-1") {
+            this.guesses++;
+            boolean hit = model.fire(location);
+            if (hit && model.shipsSunk == model.numShips) {
+                System.out.println("You sank all my battleships, in " + this.guesses + " guesses");
+            }
+        }
     }
 
     public String parseGuess(String guess){

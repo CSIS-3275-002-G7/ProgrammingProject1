@@ -10,7 +10,6 @@ public class BattleshipFrame extends JFrame implements ActionListener {
     JButton fireButton = new JButton("Fire!");
     JTextField guessInput = new JTextField();
     BattleshipController controller = new BattleshipController();
-    BattleshipModel model = new BattleshipModel();
 
     BattleshipFrame(){
 
@@ -29,7 +28,6 @@ public class BattleshipFrame extends JFrame implements ActionListener {
         interactionLabel.setBounds(0, 0, bgWidth, bgHeight);
         interactionLabel.add(fireButton);
         interactionLabel.add(guessInput);
-        model.generateShipLocations();
 
 
 //        ImageIcon ship = new ImageIcon("src/ship.png");
@@ -67,12 +65,7 @@ public class BattleshipFrame extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == fireButton) {
             String guess = controller.parseGuess(guessInput.getText());
-//            JLabel addImage = new JLabel();
-//            ImageIcon shipImage = new ImageIcon("src/ship.png");
-//            addImage.setIcon(shipImage);
-//            this.add(addImage);
-//            this.revalidate();
-
+            controller.getModel().fire(guess);
         }
     }
 }
