@@ -3,11 +3,16 @@ import java.util.List;
 
 public class BattleshipController {
     int guesses = 0;
+    int guessesLeft = 15;
     BattleshipModel model;
     BattleshipView view;
 
     public BattleshipModel getModel() {
         return model;
+    }
+
+    public int getGuessesLeft() {
+        return guessesLeft;
     }
 
     public BattleshipController(BattleshipView view) {
@@ -19,9 +24,16 @@ public class BattleshipController {
         String location = this.parseGuess(guess);
         if (!location.equals("-1")) {
             this.guesses++;
+            this.guessesLeft--;
+            this.view.updateGuesses(this.guessesLeft);
             boolean hit = model.fire(location);
             if (hit && this.getModel().getShipsSunk() == this.getModel().getNumShips()) {
                 this.view.displayMessage("You sank all my battleships in " + this.guesses + " guesses!");
+            }
+            if (this.guessesLeft == 0 && this.getModel().getShipsSunk() != this.getModel().getNumShips()) {
+                this.view.displayMessage("Game Over! You've used up all your guesses!");
+                this.view.getGuessInput().setEnabled(false);
+
             }
         }
     }

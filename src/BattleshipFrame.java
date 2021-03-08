@@ -9,8 +9,10 @@ public class BattleshipFrame extends JFrame implements ActionListener {
     JButton fireButton = new JButton("Fire!");
     JTextField guessInput = new JTextField();
     JTextArea messageLabel = new JTextArea();
+    JTextArea guessCounter = new JTextArea();
     JLayeredPane layeredPane = new JLayeredPane();
-    BattleshipView view = new BattleshipView(layeredPane, messageLabel);
+    BattleshipView view = new BattleshipView(layeredPane, messageLabel,
+            guessCounter, guessInput);
     BattleshipController controller = new BattleshipController(view);
 
     BattleshipFrame(){
@@ -37,7 +39,15 @@ public class BattleshipFrame extends JFrame implements ActionListener {
         messageLabel.setForeground(Color.GREEN);
         messageLabel.setText("Make your first guess");
 
+        guessCounter.setBounds(765, 30,200, 30);
+        guessCounter.setMargin(new Insets(0, 0, 0,0));
+        guessCounter.setFont(new Font("Arial", Font.BOLD, 15));
+        guessCounter.setOpaque(false);
+        guessCounter.setForeground(Color.GREEN);
+        guessCounter.setText("Guesses Remaining: " + this.controller.getGuessesLeft());
+
         layeredPane.setBounds(0, 0, bgWidth, bgHeight);
+        layeredPane.add(guessCounter);
         layeredPane.add(messageLabel);
         layeredPane.add(interactionLabel);
         layeredPane.add(backgroundLabel);
