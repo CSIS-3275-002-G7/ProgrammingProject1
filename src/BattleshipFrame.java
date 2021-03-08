@@ -33,13 +33,13 @@ public class BattleshipFrame extends JFrame implements ActionListener {
         interactionLabel.add(guessInput);
 
         messageLabel.setBounds(100, 50,700, 30);
-        messageLabel.setMargin(new Insets(0, 0, 0,0));
+        messageLabel.setMargin(new Insets(0, 0, 0, 0));
         messageLabel.setFont(new Font("Arial", Font.BOLD, 20));
         messageLabel.setOpaque(false);
         messageLabel.setForeground(Color.GREEN);
         messageLabel.setText("Make your first guess");
 
-        guessCounter.setBounds(765, 30,200, 30);
+        guessCounter.setBounds(765, 20, 200, 20);
         guessCounter.setMargin(new Insets(0, 0, 0,0));
         guessCounter.setFont(new Font("Arial", Font.BOLD, 15));
         guessCounter.setOpaque(false);
