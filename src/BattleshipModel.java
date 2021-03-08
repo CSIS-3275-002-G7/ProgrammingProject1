@@ -1,7 +1,5 @@
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Random;
 
 public class BattleshipModel {
@@ -9,20 +7,30 @@ public class BattleshipModel {
     int numShips = 3;
     int shipLength = 3;
     int shipsSunk = 0;
-    ArrayList<String> ship1locations = new ArrayList<String>(Arrays.asList("", "", ""));
-    ArrayList<String> ship2locations = new ArrayList<String>(Arrays.asList("", "", ""));
-    ArrayList<String> ship3locations = new ArrayList<String>(Arrays.asList("", "", ""));
-    ArrayList<String> ship1hits = new ArrayList<String>(Arrays.asList("", "", ""));
-    ArrayList<String> ship2hits = new ArrayList<String>(Arrays.asList("", "", ""));
-    ArrayList<String> ship3hits= new ArrayList<String>(Arrays.asList("", "", ""));
-    ArrayList<ArrayList> ship1 = new ArrayList<>(Arrays.asList(ship1locations, ship1hits));
-    ArrayList<ArrayList> ship2 = new ArrayList<>(Arrays.asList(ship2locations, ship2hits));
-    ArrayList<ArrayList> ship3 = new ArrayList<>(Arrays.asList(ship3locations, ship3hits));
-    ArrayList<ArrayList> ships = new ArrayList<>(Arrays.asList(ship1, ship2, ship3));
+    BattleshipView view;
+    ArrayList<ArrayList> ships = new ArrayList<>();
 
-    public BattleshipModel() {
+    public int getShipsSunk() {
+        return shipsSunk;
+    }
+
+    public int getNumShips() {
+        return numShips;
+    }
+
+    public BattleshipModel(BattleshipView view) {
+        this.populateShipsArray();
         this.generateShipLocations();
-        System.out.println(ships.get(0).get(0));
+        this.view = view;
+    }
+
+    public void populateShipsArray() {
+        for (int i = 0; i < this.numShips; i++) {
+            ArrayList<String> shipLocations = new ArrayList<>(Arrays.asList("", "", ""));
+            ArrayList<String> shipHits = new ArrayList<>(Arrays.asList("", "", ""));
+            ArrayList<ArrayList<String> > ship = new ArrayList<>(Arrays.asList(shipLocations, shipHits));
+            ships.add(ship);
+        }
     }
 
     public boolean fire(String guess){
@@ -31,22 +39,22 @@ public class BattleshipModel {
             int index = ship.get(0).indexOf(guess);
 
             if (index >= 0) if (ship.get(1).get(index) == "hit") {
-                System.out.println("Oops, you already hit that location!");
+                this.view.displayMessage("Oops, you already hit that location!");
                 return true;
             } else {
                 ship.get(1).set(index, "hit");
-                System.out.println(guess);
-                System.out.println("HIT!");
+                this.view.displayShip(guess);
+                this.view.displayMessage("HIT!");
 
                 if (this.isSunk(ship)) {
-                    System.out.println("You sank my battleship!");
+                    this.view.displayMessage("You sank my battleship!");
                     this.shipsSunk++;
                 }
                 return true;
             }
         }
-        System.out.println(guess);
-        System.out.println("You missed.");
+        this.view.displayMiss(guess);
+        this.view.displayMessage("You missed");
         return false;
     }
 
@@ -70,7 +78,7 @@ public class BattleshipModel {
     }
 
     public ArrayList<String> generateShip(){
-        ArrayList<String> newShipLocations = new ArrayList<String>();
+        ArrayList<String> newShipLocations = new ArrayList<>();
         Random r = new Random();
         int direction = r.nextInt(2) + 1;
         int row;
@@ -96,8 +104,8 @@ public class BattleshipModel {
     public boolean checkCollision(ArrayList<String> shipLocations) {
         for (int i = 0; i < this.numShips; i++) {
             ArrayList<ArrayList> ship = this.ships.get(i);
-            for (int j = 0; j < shipLocations.size(); j++) {
-                if (ship.get(0).indexOf(shipLocations.get(j)) >= 0) {
+            for (String shipLocation : shipLocations) {
+                if (ship.get(0).contains(shipLocation)) {
                     return true;
                 }
             }
