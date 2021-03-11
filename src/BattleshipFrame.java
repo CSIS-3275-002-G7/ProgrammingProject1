@@ -10,9 +10,10 @@ public class BattleshipFrame extends JFrame implements ActionListener {
     JTextField guessInput = new JTextField();
     JTextArea messageLabel = new JTextArea();
     JTextArea guessCounter = new JTextArea();
+    JTextArea guessTime = new JTextArea();
     JLayeredPane layeredPane = new JLayeredPane();
     BattleshipView view = new BattleshipView(layeredPane, messageLabel,
-            guessCounter, guessInput);
+            guessCounter, guessTime, guessInput);
     BattleshipController controller = new BattleshipController(view);
 
     BattleshipFrame(){
@@ -36,18 +37,26 @@ public class BattleshipFrame extends JFrame implements ActionListener {
         messageLabel.setMargin(new Insets(0, 0, 0, 0));
         messageLabel.setFont(new Font("Arial", Font.BOLD, 20));
         messageLabel.setOpaque(false);
-        messageLabel.setForeground(Color.GREEN);
+        messageLabel.setForeground(Color.LIGHT_GRAY);
         messageLabel.setText("Make your first guess");
 
         guessCounter.setBounds(765, 20, 200, 20);
         guessCounter.setMargin(new Insets(0, 0, 0,0));
         guessCounter.setFont(new Font("Arial", Font.BOLD, 15));
         guessCounter.setOpaque(false);
-        guessCounter.setForeground(Color.GREEN);
+        guessCounter.setForeground(Color.LIGHT_GRAY);
         guessCounter.setText("Guesses Remaining: " + this.controller.getGuessesLeft());
+
+        guessTime.setBounds(465, 20, 200, 20);
+        guessTime.setMargin(new Insets(0, 0, 0,0));
+        guessTime.setFont(new Font("Arial", Font.BOLD, 15));
+        guessTime.setOpaque(false);
+        guessTime.setForeground(Color.LIGHT_GRAY);
+        guessTime.setText("Time Remaining: " + controller.getTimeLeft());
 
         layeredPane.setBounds(0, 0, bgWidth, bgHeight);
         layeredPane.add(guessCounter);
+        layeredPane.add(guessTime);
         layeredPane.add(messageLabel);
         layeredPane.add(interactionLabel);
         layeredPane.add(backgroundLabel);
