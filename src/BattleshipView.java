@@ -37,7 +37,7 @@ public class BattleshipView {
         JLabel shipLabel = new JLabel(ship);
         int row = guess.charAt(0) - '0';
         int col = guess.charAt(1) - '0';
-        shipLabel.setBounds(172 +(95 * col), 97 + (95 * row), 94, 94);
+        shipLabel.setBounds(172 +(95 * col), 97 + (95 * row), 100, 100);
         this.layeredPane.add(shipLabel, 0);
     }
 
