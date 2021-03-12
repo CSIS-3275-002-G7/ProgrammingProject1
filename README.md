@@ -138,6 +138,7 @@ The class that controls the view of the game and makes changes to it based on th
   User only when the user misses a ship.
 - **updateGuesses(int guessesLeft)** - Updates the guess counter to reflect how many remaining
   guesses the user has.
+- **updateTime(int timeLeft)** - Updates the decrementing timer every second to reflect the play time left.
 
 **Properties**<br/>
 - **JLayeredPane layeredPane** - Layered pane that controls how the UI is organized.
@@ -160,6 +161,8 @@ user guesses.
 - **getGuessesLeft()** - Getter method for the `guessesLeft` property.
 - **void processGuess(String guess)** - Processes the guess entered by the user. It checks if the user
   has won or lost the game as well as updates the number of guesses left, and the total guess count.
+  Has a timer object which is limiting users play time, starting with 60 seconds decrementing after very first guess,
+  and ending the game after time expires. Updates the view with Game Over message.
 - **String parseGuess(String guess)** - Parses the guess entered by the user. Maps from a character
   and number format into a set of coordinates representing a square on the board.
 
