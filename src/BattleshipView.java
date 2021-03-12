@@ -1,19 +1,24 @@
 import javax.swing.*;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class BattleshipView {
     JLayeredPane layeredPane;
     JTextArea messageLabel;
     JTextArea guessCounter;
+    JTextArea guessTime;
     JTextField guessInput;
     ImageIcon ship = new ImageIcon("src/ship.png");
     ImageIcon miss = new ImageIcon("src/miss.png");
 
     public BattleshipView(JLayeredPane layeredPane, JTextArea messageLabel,
-                          JTextArea guessCounter, JTextField guessInput) {
+                          JTextArea guessCounter, JTextArea guessTime, JTextField guessInput) {
         this.layeredPane = layeredPane;
         this.messageLabel = messageLabel;
         this.guessCounter = guessCounter;
         this.guessInput = guessInput;
+        this.guessTime = guessTime;
+
     }
 
     public JLayeredPane getLayeredPane() {
@@ -46,5 +51,9 @@ public class BattleshipView {
 
     public void updateGuesses(int guessesLeft) {
         this.guessCounter.setText("Guesses Remaining: " + guessesLeft);
+    }
+
+    public void updateTime(int timeLeft){
+        this.guessTime.setText("Time remaining: " + timeLeft);
     }
 }
