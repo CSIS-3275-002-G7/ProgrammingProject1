@@ -1,9 +1,9 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Testing" type="Application" factoryName="Application" nameIsGenerated="true">
+  <configuration default="false" name="Battleship" type="Application" factoryName="Application" nameIsGenerated="true">
     <option name="ALTERNATIVE_JRE_PATH" value="15" />
     <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
-    <option name="MAIN_CLASS_NAME" value="Testing" />
-    <module name="TestingStuff" />
+    <option name="MAIN_CLASS_NAME" value="Battleship" />
+    <module name="Battleship" />
     <method v="2">
       <option name="Make" enabled="true" />
     </method>
